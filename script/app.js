@@ -43,16 +43,34 @@ function appendHtml (studentObject) {
   `
 }
 
+function valididationFunction (...studentElement) {
+  let checker = 0;
+  studentElement.forEach(e => {
+    if(!e.value) {
+      const elementClass = e.className + " is-invalid";
+      e.setAttribute("class", elementClass)
+    }
+    else {
+      checker++;
+      const elementClass = e.className + " is-valid";
+      e.setAttribute("class", elementClass)
+    }
+  });
+  return checker == 3 ? true : false;
+}
+
 function addStudentFunction (e) {
   e.preventDefault();
-  const studentObject = {
-    nome: e.srcElement[0].value,
-    cognome: e.srcElement[1].value,
-    eta: e.srcElement[2].value,
+  let isValidate = valididationFunction(e.srcElement[0], e.srcElement[1], e.srcElement[2]);
+  if(isValidate) {
+    const studentObject = {
+      nome: e.srcElement[0].value,
+      cognome: e.srcElement[1].value,
+      eta: e.srcElement[2].value,
+    }
+    appendHtml(studentObject);
+    oggettiStudenti.push(studentObject);
   }
-
-  console.log(studentObject)
-  
 
 }
 
