@@ -8,17 +8,7 @@ const oggettiStudenti = [
   { nome: "Paolo", cognome: "Esposito", eta: 24 },
   { nome: "Sara", cognome: "Ricci", eta: 20 },
   { nome: "Marco", cognome: "Costa", eta: 23 },
-  { nome: "Chiara", cognome: "Gallo", eta: 22 },
-  { nome: "Davide", cognome: "Ferri", eta: 21 },
-  { nome: "Laura", cognome: "Mancini", eta: 24 },
-  { nome: "Alessandro", cognome: "Galli", eta: 20 },
-  { nome: "Eleonora", cognome: "Santoro", eta: 23 },
-  { nome: "Roberto", cognome: "Mazza", eta: 22 },
-  { nome: "Valentina", cognome: "Leone", eta: 21 },
-  { nome: "Matteo", cognome: "Conti", eta: 24 },
-  { nome: "Elisa", cognome: "Caruso", eta: 20 },
-  { nome: "Filippo", cognome: "Moretti", eta: 23 },
-  { nome: "Cristina", cognome: "Pellegrino", eta: 22 }
+  { nome: "Chiara", cognome: "Gallo", eta: 22 }
 ];
 
 // CICLO FOR OF
@@ -35,3 +25,41 @@ const oggettiStudenti = [
 // oggettiStudenti.forEach(student => {
 //   console.log(student.nome, student.cognome);
 // })
+
+// ESERCIZIO 2 PARTE
+
+// DICHIRAZIONI
+const formAddStudent = document.getElementById("formAddStudent");
+
+// FUNZIONI
+function appendHtml (studentObject) {
+  const listUserTable = document.getElementById('tbody-userList');
+  listUserTable.innerHTML += `
+  <tr>
+    <td>${studentObject.nome}</td>
+    <td>${studentObject.cognome}</td>
+    <td>${studentObject.eta}</td>
+  </tr>
+  `
+}
+
+function addStudentFunction (e) {
+  e.preventDefault();
+  const studentObject = {
+    nome: e.srcElement[0].value,
+    cognome: e.srcElement[1].value,
+    eta: e.srcElement[2].value,
+  }
+
+  console.log(studentObject)
+  
+
+}
+
+// CICLO INIZIALE CHE POPOLA LA TABELLA
+
+for (const value of oggettiStudenti) {
+  appendHtml(value);
+}
+
+formAddStudent.addEventListener('submit', addStudentFunction);
